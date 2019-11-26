@@ -29,7 +29,7 @@ public class DemoLu {
         //检查预期
         Thread.sleep(1000 * 3);//等待搜索结果
         //搜索结果
-        WebElement h3 = driver.findElement(By.id("//*[@id='content_left']//h3"));//第一行搜索结果的标题
+        WebElement h3 = driver.findElement(By.xpath("//*[@id='content_left']//h3"));//第一行搜索结果的标题
         //检查标题内容
         String expected = h3.getText();
         if (expected.contains(keyWorld)) {

@@ -11,13 +11,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @Date 2019/11/26 15:22
  */
 public class DemoLu {
-    private static final String driverPath = DemoLu.class.getResource("/").getPath() + "drivers/chromedriver77.0.3865.90.exe";
+    private static final String DRIVER_PATH = DemoLu.class.getResource("/").getPath() + "drivers/chromedriver77.0.3865.90.exe";
     private static WebDriver driver;
 
     public static void main(String[] args) throws InterruptedException {
 
         String keyWorld = "hello world";
-        System.setProperty("webdriver.chrome.driver", driverPath);
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 

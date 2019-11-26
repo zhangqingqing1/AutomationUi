@@ -2,7 +2,6 @@
 **/target/
 **/META-INF/
 **/test-output/
-/tcenter/test/
 
 # Compiled class file
 *.class
@@ -40,7 +39,7 @@ hs_err_pid*
 .sts4-cache
 
 ### IntelliJ IDEA ###
-**/.idea/
+/.idea/
 *.iws
 *.iml
 *.ipr

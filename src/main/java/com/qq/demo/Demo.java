@@ -6,6 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * @Desc
  * @Author qiwei.lu@b-and-qchina.com
@@ -15,12 +19,15 @@ public class Demo {
     //private static final String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver77.0.3865.90.exe";
     private static WebDriver driver;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         String machineName = System.getProperty("user.name");
         String chromeVersion = MachineChromeMap.getChromeVersion(machineName);
         String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
-
+        //使用Properties获取配置
+//        Properties properties = new Properties();
+//        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
+//        String chromeVersionFromProperties = properties.getProperty(machineName);
 
         String keyWorld = "hello world";
         System.setProperty("webdriver.chrome.driver", driverPath);

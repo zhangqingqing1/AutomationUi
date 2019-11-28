@@ -6,10 +6,18 @@ package com.qq.enums;
  * @Date 2019/11/28 9:37
  */
 public enum MachineChromeMap {
-    luqiwei("Administrator", "77.0.3865.90")
-    ;
+    lqw("Administrator", "77.0.3865.90");
     private String machineName;
     private String chromeVersion;
+
+    public static String getChromeVersion(String machineName) {
+        for (MachineChromeMap map : MachineChromeMap.values()) {
+            if (map.getMachineName().equals(machineName)) {
+                return map.getChromeVersion();
+            }
+        }
+        throw new RuntimeException("根据机器名未找到谷歌浏览器版本信息");
+    }
 
     public String getMachineName() {
         return machineName;

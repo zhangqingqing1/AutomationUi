@@ -6,7 +6,10 @@ package com.qq.enums;
  * @Date 2019/11/28 9:37
  */
 public enum MachineChromeMap {
-    lqw("Administrator", "77.0.3865.90");
+    lqw("Administrator", "77.0.3865.90"),
+    ZQQ("360JR", "78.0.3904.105"),
+    ;
+
     private String machineName;
     private String chromeVersion;
 

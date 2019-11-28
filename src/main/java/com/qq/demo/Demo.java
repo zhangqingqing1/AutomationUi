@@ -24,19 +24,19 @@ public class Demo {
         String chromeVersion = MachineChromeMap.getChromeVersion(machineName);
         String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
+
         //使用Properties获取配置
 //        Properties properties = new Properties();
 //        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
 //        String chromeVersionFromProperties = properties.getProperty(machineName);
-
-        String keyWorld = "hello world";
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         //搜索hello world
+        String keyword="hello world";
         driver.get("https://www.baidu.com/");
-        driver.findElement(By.id("kw")).sendKeys(keyWorld);
+        driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();
 
         //检查预期
@@ -45,7 +45,7 @@ public class Demo {
         WebElement h3 = driver.findElement(By.xpath("//*[@id='content_left']//h3"));//第一行搜索结果的标题
         //检查标题内容
         String expected = h3.getText();
-        if (expected.contains(keyWorld)) {
+        if (expected.contains(keyword)) {
             System.out.println("搜索成功，符合预期");
         } else {
             System.out.println("搜索结果不符合预期");

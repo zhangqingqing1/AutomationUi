@@ -18,10 +18,10 @@ public class Demo {
     private static WebDriver driver;
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        String machineName = System.getProperty("user.name");
+        String userName = System.getProperty("user.name");
         Properties properties = new Properties();
         properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
-        String chromeVersion = properties.getProperty(machineName);
+        String chromeVersion = properties.getProperty(userName);
         String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
 

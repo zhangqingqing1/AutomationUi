@@ -1,4 +1,4 @@
-package com.qq.demo.util;
+package com.qq.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,15 +16,9 @@ public class GetDate {
         return new SimpleDateFormat("yyyy-MM-dd ").format(cr.getTime());
     }
 
-    public static void setDateStart(String dateStart) {
-        GetDate.dateStart = dateStart;
-    }
-
     public static String getDateEnd() {
         return new SimpleDateFormat("yyyy-MM-dd ").format(new Date());
     }
 
-    public static void setDateEnd(String dateEnd) {
-        GetDate.dateEnd = dateEnd;
-    }
+
 }

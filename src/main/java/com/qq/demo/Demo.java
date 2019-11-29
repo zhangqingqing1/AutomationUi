@@ -47,6 +47,12 @@ public class Demo {
             System.out.println("搜索结果不符合预期");
         }
 
+        driver.findElement(By.className("search_tool")).click();
+
+        driver.findElement(By.xpath("//*[@class='search_tool_tf ']")).click();
+
+
+
         //关闭浏览器连接，释放资源
         driver.quit();
     }

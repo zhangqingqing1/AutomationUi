@@ -1,13 +1,10 @@
 package com.qq.demo;
 
-import com.qq.enums.MachineChromeMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import util.getProperties_zqq;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -22,18 +19,11 @@ public class Demo {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         String machineName = System.getProperty("user.name");
-        String chromeVersion = MachineChromeMap.getChromeVersion(machineName);
+        Properties properties = new Properties();
+        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
+        String chromeVersion = properties.getProperty(machineName);
         String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
-
-        //使用Properties获取配置
-//        Properties properties = new Properties();
-//        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
-//        String chromeVersionFromProperties = properties.getProperty(machineName);
-        //使用Properties获取配置zqq
-//        getProperties_zqq gz=new getProperties_zqq();
-//        String chromeVersion_zqq= gz.getKeyValue(machineName);
-//        String driverPath_zqq = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();

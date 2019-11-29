@@ -8,6 +8,7 @@ package com.qq.enums;
 public enum MachineChromeMap {
     lqw("Administrator", "77.0.3865.90"),
     ZQQ("360JR", "78.0.3904.105"),
+    Yyz("yyz__", "49.0.2623.112"),
     ;
 
     private String machineName;
@@ -41,4 +42,5 @@ public enum MachineChromeMap {
     MachineChromeMap(String machineName, String chromeVersion) {
         this.machineName = machineName;
         this.chromeVersion = chromeVersion;
-    }}
+    }
+}

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import util.getProperties_zqq;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,6 +30,11 @@ public class Demo {
 //        Properties properties = new Properties();
 //        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
 //        String chromeVersionFromProperties = properties.getProperty(machineName);
+        //使用Properties获取配置zqq
+//        getProperties_zqq gz=new getProperties_zqq();
+//        String chromeVersion_zqq= gz.getKeyValue(machineName);
+//        String driverPath_zqq = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
+
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();

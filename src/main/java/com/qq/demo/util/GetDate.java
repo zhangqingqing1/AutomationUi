@@ -9,27 +9,10 @@ public class GetDate {
     private static String dateStart;
     private static String dateEnd;
     static Date date = new Date();
-    static String date1 = new SimpleDateFormat("yyyy-MM-dd ").format(date);
-
     static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    static Date myDate1;
 
-    static {
-        try {
-            myDate1 = dateFormat.parse("2019-01-01");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static String dateStr1 = new SimpleDateFormat("yyyy-MM-dd ").format(myDate1);
-
-
-    public GetDate() throws ParseException {
-    }
-
-    public static String getDateStart() {
-        return dateStr1 ;
+    public static String getDateStart() throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd ").format(dateFormat.parse("2019-01-01"));
     }
 
     public static void setDateStart(String dateStart) {
@@ -37,7 +20,7 @@ public class GetDate {
     }
 
     public static String getDateEnd() {
-        return date1;
+        return new SimpleDateFormat("yyyy-MM-dd ").format(date);
     }
 
     public static void setDateEnd(String dateEnd) {

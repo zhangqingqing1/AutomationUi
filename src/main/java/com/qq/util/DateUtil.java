@@ -3,11 +3,6 @@ package com.qq.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @Desc
- * @Author qiwei.lu@b-and-qchina.com
- * @Date 2019/11/29 14:50
- */
 public class DateUtil {
     /**
      * 获取当年的第一天的日期

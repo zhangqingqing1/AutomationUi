@@ -31,7 +31,7 @@ public class Demo {
         driver.manage().window().maximize();
 
         //搜索hello world
-        String keyword = "hello world";
+        String keyword = "日本";
         driver.get("https://www.baidu.com/");
         driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();

@@ -8,7 +8,6 @@ import java.util.Date;
 public class GetDate {
     private static String dateStart;
     private static String dateEnd;
-    static Date date = new Date();
     static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String getDateStart() throws ParseException {
@@ -20,7 +19,7 @@ public class GetDate {
     }
 
     public static String getDateEnd() {
-        return new SimpleDateFormat("yyyy-MM-dd ").format(date);
+        return new SimpleDateFormat("yyyy-MM-dd ").format(new Date());
     }
 
     public static void setDateEnd(String dateEnd) {

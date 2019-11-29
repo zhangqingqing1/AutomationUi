@@ -9,7 +9,6 @@ import java.util.Date;
 public class GetDate {
     private static String dateStart;
     private static String dateEnd;
-    static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public static String getDateStart() throws ParseException {
         Calendar cr=Calendar.getInstance();

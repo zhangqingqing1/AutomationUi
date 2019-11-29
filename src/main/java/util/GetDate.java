@@ -1,31 +1,48 @@
 package util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
 public class GetDate {
-    private static String date0101;
-    private static String datenow;
-    DateFormat format= new SimpleDateFormat("yy-mm-dd");
-    Date date = new Date();
-    Calendar cr=Calendar.getInstance();
+    private static String dateStart;
+    private static String dateEnd;
+    static Date date = new Date();
+    static String date1 = new SimpleDateFormat("yyyy-MM-dd ").format(date);
 
-    public void setDate0101(String date0101) {
-        this.date0101 = format.format(date);
+    static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    static Date myDate1;
+
+    static {
+        try {
+            myDate1 = dateFormat.parse("2019-01-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setDatenow(String datenow) {
-        this.datenow = format.format(new Date());
+    static String dateStr1 = new SimpleDateFormat("yyyy-MM-dd ").format(myDate1);
+
+
+    public GetDate() throws ParseException {
     }
 
-    public  static String getDate0101() {
-        return date0101;
+    public static String getDateStart() {
+        return dateStr1 ;
     }
 
-    public static String getDatenow() {
-        return datenow;
+    public static void setDateStart(String dateStart) {
+        GetDate.dateStart = dateStart;
+    }
+
+    public static String getDateEnd() {
+        return date1;
+    }
+
+    public static void setDateEnd(String dateEnd) {
+        GetDate.dateEnd = dateEnd;
     }
 }

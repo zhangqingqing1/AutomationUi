@@ -29,8 +29,20 @@ public class Demo_wxj {
         driver.get("https://www.baidu.com/");
         driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();
-        Thread.sleep(1000 * 3);
 
+        //检查预期
+        Thread.sleep(1000 * 3);
+        //搜索结果
+        WebElement h3 = driver.findElement(By.xpath("//*[@id='content_left']//h3"));//第一行搜索结果的标题
+        //检查标题内容
+        String expected = h3.getText();
+        if (expected.contains(keyword)) {
+            System.out.println("搜索成功，符合预期");
+        } else {
+            System.out.println("搜索结果不符合预期");
+        }
+
+        /*搜索工具筛选*/
         //点击搜索工具
         driver.findElement(By.className("search_tool")).click();
         Thread.sleep(1000 * 3);
@@ -58,9 +70,9 @@ public class Demo_wxj {
         //检查标题内容
         String expectedFilter = h3ByFilter.getText();
         if (expectedFilter.contains(keyword)) {
-            System.out.println("筛选后搜索结果包含hello world");
+            System.out.println("筛选后搜索结果 第一条包含hello world");
         } else {
-            System.out.println("筛选后搜索结果不包含hello world");
+            System.out.println("筛选后搜索结果 第一条不包含hello world");
         }
 
         //关闭浏览器连接，释放资源

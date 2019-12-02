@@ -5,11 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class getTimeStamp_wxj {
-    public static void main(String[] args){
-        Date date = new Date();
-        System.out.println(getStartOfDay(date));
-        System.out.println(getEndOfDay(date));
-    }
+//    public static void main(String[] args){
+//        Date date = new Date();
+//        System.out.println(getStartOfDay(date));
+//        System.out.println(getEndOfDay(date));
+//    }
 
     public static String getEndOfDay(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");

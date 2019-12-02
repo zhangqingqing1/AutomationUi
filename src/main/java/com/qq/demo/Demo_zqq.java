@@ -50,20 +50,20 @@ public class Demo_zqq {
             System.out.println("搜索结果不符合预期");
         }
         //任务2 在搜索出hello world的基础上，做筛选，自定义时间，当年的1月1号到今天（程序运行的这一天），然后再校验第一行搜索结果标题是不是包含hello world
-        driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div/div[2]/div")).click();
+        driver.findElement(By.className("search_tool")).click();
         Thread.sleep(1000 * 2);
         driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div/div[1]/span[2]")).click();
         Thread.sleep(1000 * 2);
         // 输入时间
-        driver.findElement(By.xpath("//*[@id=\"c-tips-container\"]/div[1]/div/div/ul/li[6]/p[1]/input")).clear();
-        driver.findElement(By.xpath("//*[@id=\"c-tips-container\"]/div[1]/div/div/ul/li[6]/p[1]/input")).sendKeys(GetDate.getDateStart());
-        driver.findElement(By.xpath("//*[@id=\"c-tips-container\"]/div[1]/div/div/ul/li[6]/p[2]/input")).clear();
-        driver.findElement(By.xpath("//*[@id=\"c-tips-container\"]/div[1]/div/div/ul/li[6]/p[2]/input")).sendKeys(GetDate.getDateEnd());
+        driver.findElement(By.name("st")).clear();
+        driver.findElement(By.name("st")).sendKeys(GetDate.getDateStart());
+        driver.findElement(By.name("et")).clear();
+        driver.findElement(By.name("et")).sendKeys(GetDate.getDateEnd());
         Thread.sleep(1000 * 2);
-        driver.findElement(By.xpath("//*[@id=\"c-tips-container\"]/div[1]/div/div/ul/li[6]/a")).click();
+        driver.findElement(By.linkText("确认")).click();
         Thread.sleep(1000 * 3);
         //搜索结果
-        WebElement h4 = driver.findElement(By.xpath("//*[@id=\"1\"]/h3/a/em"));//第一行搜索结果的标题
+        WebElement h4 = driver.findElement(By.xpath("//*[@id=\"1\"]/h3/a"));//第一行搜索结果的标题
         //检查标题内容
         String expected1 = h4.getText();
         if (expected.contains(keyword)) {

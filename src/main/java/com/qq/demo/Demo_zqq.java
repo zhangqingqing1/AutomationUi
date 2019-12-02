@@ -1,15 +1,12 @@
 package com.qq.demo;
 
-import com.qq.util.GetDate;
+import com.qq.util.MyUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Properties;
 
 /**
  * @Desc
@@ -21,15 +18,7 @@ public class Demo_zqq {
     private static WebDriver driver;
 
     public static void main(String[] args) throws InterruptedException, IOException, ParseException {
-        String machineName = System.getProperty("user.name");
-        Properties properties = new Properties();
-        properties.load(Demo_zqq.class.getResourceAsStream("/chromeversion.properties"));
-        String chromeVersion = properties.getProperty(machineName);
-        String driverPath = Demo_zqq.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
-
-
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
+        driver = MyUtil.getDriver();
         driver.manage().window().maximize();
 
         //搜索hello world
@@ -56,9 +45,9 @@ public class Demo_zqq {
         Thread.sleep(1000 * 2);
         // 输入时间
         driver.findElement(By.name("st")).clear();
-        driver.findElement(By.name("st")).sendKeys(GetDate.getDateStart());
+        driver.findElement(By.name("st")).sendKeys(MyUtil.getDateStart());
         driver.findElement(By.name("et")).clear();
-        driver.findElement(By.name("et")).sendKeys(GetDate.getDateEnd());
+        driver.findElement(By.name("et")).sendKeys(MyUtil.getDateEnd());
         Thread.sleep(1000 * 2);
         driver.findElement(By.linkText("确认")).click();
         Thread.sleep(1000 * 3);

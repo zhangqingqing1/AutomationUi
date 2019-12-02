@@ -1,12 +1,16 @@
 package com.qq.demo;
 
 import com.qq.util.MyUtil;
+import com.qq.util.MyWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.function.Function;
 
 /**
  * @Desc
@@ -17,8 +21,15 @@ public class Demo_zqq {
     //private static final String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver77.0.3865.90.exe";
     private static WebDriver driver;
 
+
     public static void main(String[] args) throws InterruptedException, IOException, ParseException {
-        driver = MyUtil.getDriver();
+         //定义driver
+         driver = MyUtil.getDriver();
+          Function function = (str)->{
+            WebDriverWait wait = new WebDriverWait(driver, 5); // 设置等待时间， 最大等待 5 秒
+            return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.valueOf(str))));
+
+        };
         driver.manage().window().maximize();
 
         //搜索hello world
@@ -28,7 +39,9 @@ public class Demo_zqq {
         driver.findElement(By.id("su")).click();
 
         //检查预期
-        Thread.sleep(1000 * 3);//等待搜索结果
+       MyWait myWait = new MyWait("//*[@id='content_left']//h3");
+       Object until = myWait.until(function);
+       System.out.println(until);
         //搜索结果
         WebElement h3 = driver.findElement(By.xpath("//*[@id='content_left']//h3"));//第一行搜索结果的标题
         //检查标题内容

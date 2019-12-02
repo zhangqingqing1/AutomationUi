@@ -70,22 +70,6 @@ public class MyUtil  {
         // 获取本月最后一天的时间戳
         return c.getTimeInMillis();
     }
-    //重写function
-    static Function function = (str)->{
-        System.out.println(str);
-        WebDriver driver = null;
-        try {
-            driver = MyUtil.getDriver();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        WebDriverWait wait = new WebDriverWait(driver, 5); // 设置等待时间， 最大等待 5 秒
-        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.valueOf(str))));
 
-    };
-    public static  void waitElement( ) {
-        MyWait myWait = new MyWait("44");
-        Object until = myWait.until(function);
-    }
 }
 

@@ -19,7 +19,7 @@ public class GetDate {
         return new SimpleDateFormat("yyyy-MM-dd ").format(new Date());
     }
 
-    public static Long getMonthBegin(String datestr) throws ParseException {
+    public static Long getDayBegin(String datestr) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(datestr);
         Calendar c = Calendar.getInstance();
@@ -37,7 +37,7 @@ public class GetDate {
     }
 
 
-    public static Long getMonthEnd(String datestrr) throws ParseException {
+    public static Long getDayEnd(String datestrr) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(datestrr);
         Calendar c = Calendar.getInstance();

@@ -18,32 +18,32 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class zqq {
+public class Zqq {
     public static void main(String[] args) throws ParseException, InterruptedException {
         System.out.println(MyUtil.getDateStart() + "," + MyUtil.getDateEnd());
         System.out.println(MyUtil.getDayBegin("2019-01-01") + "," + MyUtil.getDayEnd("2019-01-01"));
 //        waitElement();
-        Person p1=new Person("111",98);
-        Person p2=new Person("111",80);
-        Person p3=new Person("111",70);
-        Person p4=new Person("111",66);
-        List<Person> list=new ArrayList<>();
-        list.add(p1);
-        list.add(p2);
-        list.add(p3);
-        list.add(p4);
+//        Person p1=new Person("111",98);
+//        Person p2=new Person("111",80);
+//        Person p3=new Person("111",70);
+//        Person p4=new Person("111",66);
+//        List<Person> list=new ArrayList<>();
+//        list.add(p1);
+//        list.add(p2);
+//        list.add(p3);
+//        list.add(p4);
+////        for (Person P:list
+////             ) {
+////            System.out.println(P.toString());
+////
+////        }
+//        list.sort((a, b) -> a.getGrade() - b.getGrade());
 //        for (Person P:list
-//             ) {
+//        ) {
 //            System.out.println(P.toString());
 //
 //        }
-        list.sort((a, b) -> a.getGrade() - b.getGrade());
-        for (Person P:list
-        ) {
-            System.out.println(P.toString());
-
-        }
-        list.stream().sorted((s1, s2) ->s1.getGrade() - s2.getGrade()).collect(Collectors.toList());
+//        list.stream().sorted((s1, s2) ->s1.getGrade() - s2.getGrade()).collect(Collectors.toList());
     }
 
 //

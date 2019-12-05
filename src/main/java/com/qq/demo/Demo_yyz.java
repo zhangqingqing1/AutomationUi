@@ -13,9 +13,9 @@ public class Demo_yyz {
     public static void main(String[] args)throws InterruptedException, IOException{
         String userName = System.getProperty("user.name");
         Properties properties = new Properties();
-        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
+        properties.load(Demo_yyz.class.getResourceAsStream("/chromeversion.properties"));
         String chromeVersion = properties.getProperty(userName);
-        String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
+        String driverPath = Demo_yyz.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
 
         System.setProperty("webdriver.chrome.driver", driverPath);

@@ -16,9 +16,9 @@ public class Demo_wxj {
     public static void main(String[] args) throws InterruptedException, IOException {
         String userName = System.getProperty("user.name");
         Properties properties = new Properties();
-        properties.load(Demo.class.getResourceAsStream("/chromeversion.properties"));
+        properties.load(Demo_wxj.class.getResourceAsStream("/chromeversion.properties"));
         String chromeVersion = properties.getProperty(userName);
-        String driverPath = Demo.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
+        String driverPath = Demo_wxj.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
 
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();

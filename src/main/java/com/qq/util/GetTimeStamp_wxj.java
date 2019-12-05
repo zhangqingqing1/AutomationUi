@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class getTimeStamp_wxj {
+public class GetTimeStamp_wxj {
 //    public static void main(String[] args){
 //        Date date = new Date();
 //        System.out.println(getStartOfDay(date));

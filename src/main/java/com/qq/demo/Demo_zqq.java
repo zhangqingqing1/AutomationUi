@@ -29,53 +29,54 @@ public class Demo_zqq {
         driver.manage().window().maximize();
 
     }
-        @Test
-        public void test() throws InterruptedException, ParseException {
 
-           //搜索hello world
-            String keyword = "hello world";
-            driver.get("https://www.baidu.com/");
-            driver.findElement(By.id("kw")).sendKeys(keyword);
-            driver.findElement(By.id("su")).click();
+    @Test
+    public void test() throws InterruptedException, ParseException {
 
-            //搜索结果
-           WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));
-            //检查标题内容
-            String expected = h3.getText();
-            if (expected.contains(keyword)) {
-                System.out.println("搜索成功，符合预期");
-            } else {
-                System.out.println("搜索结果不符合预期");
-            }
-            //任务2 在搜索出hello world的基础上，做筛选，自定义时间，当年的1月1号到今天（程序运行的这一天），然后再校验第一行搜索结果标题是不是包含hello world
-            driver.findElement(By.className("search_tool")).click();
-            Thread.sleep(1000 * 2);
-            driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div/div[1]/span[2]")).click();
-            Thread.sleep(1000 * 2);
-            // 输入时间
-            driver.findElement(By.name("st")).clear();
-            driver.findElement(By.name("st")).sendKeys(MyUtil.getDateStart());
-            driver.findElement(By.name("et")).clear();
-            driver.findElement(By.name("et")).sendKeys(MyUtil.getDateEnd());
-            Thread.sleep(1000 * 2);
-            driver.findElement(By.linkText("确认")).click();
-            Thread.sleep(1000 * 3);
-            //搜索结果WebElement h3 =
-            WebElement h4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\"//*[@id=\\\"1\\\"]/h3/a\"")));
-            //检查标题内容
-            String expected1 = h4.getText();
-            if (expected.contains(keyword)) {
-                System.out.println("自定义时间搜索成功，符合预期");
-            } else {
-                System.out.println("搜索结果不符合预期");
-            }
+        //搜索hello world
+        String keyword = "hello world";
+        driver.get("https://www.baidu.com/");
+        driver.findElement(By.id("kw")).sendKeys(keyword);
+        driver.findElement(By.id("su")).click();
+
+        //搜索结果
+        WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));
+        //检查标题内容
+        String expected = h3.getText();
+        if (expected.contains(keyword)) {
+            System.out.println("搜索成功，符合预期");
+        } else {
+            System.out.println("搜索结果不符合预期");
         }
-
-            //关闭浏览器连接，释放资源
-            @AfterTest
-            public void AfterTest () {
-                driver.quit();
-            }
-
+        //任务2 在搜索出hello world的基础上，做筛选，自定义时间，当年的1月1号到今天（程序运行的这一天），然后再校验第一行搜索结果标题是不是包含hello world
+        driver.findElement(By.className("search_tool")).click();
+        Thread.sleep(1000 * 2);
+        driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div/div[1]/span[2]")).click();
+        Thread.sleep(1000 * 2);
+        // 输入时间
+        driver.findElement(By.name("st")).clear();
+        driver.findElement(By.name("st")).sendKeys(MyUtil.getDateStart());
+        driver.findElement(By.name("et")).clear();
+        driver.findElement(By.name("et")).sendKeys(MyUtil.getDateEnd());
+        Thread.sleep(1000 * 2);
+        driver.findElement(By.linkText("确认")).click();
+        Thread.sleep(1000 * 3);
+        //搜索结果WebElement h3 =
+        WebElement h4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\"//*[@id=\\\"1\\\"]/h3/a\"")));
+        //检查标题内容
+        String expected1 = h4.getText();
+        if (expected.contains(keyword)) {
+            System.out.println("自定义时间搜索成功，符合预期");
+        } else {
+            System.out.println("搜索结果不符合预期");
         }
+    }
+
+    //关闭浏览器连接，释放资源
+    @AfterClass
+    public void AfterTest() {
+        driver.quit();
+    }
+
+}
 

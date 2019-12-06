@@ -22,8 +22,11 @@ public class Zqq {
     public static void main(String[] args) throws ParseException, InterruptedException {
         System.out.println(MyUtil.getDateStart() + "," + MyUtil.getDateEnd());
         System.out.println(MyUtil.getDayBegin("2019-01-01") + "," + MyUtil.getDayEnd("2019-01-01"));
-
-
+        Function function = (str) -> {
+            WebDriverWait wait = null;
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath((String) str)));
+        };
+       new MyWait("1213").until(function);
     }
 
     }

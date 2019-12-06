@@ -20,6 +20,7 @@ import java.util.function.Function;
  */
 public class Demo_zqq {
     private static WebDriver driver;
+    WebDriverWait wait;
 
     @BeforeClass
     public void beforeClass() throws InterruptedException, IOException, ParseException {
@@ -30,23 +31,15 @@ public class Demo_zqq {
     }
         @Test
         public void test() throws InterruptedException, ParseException {
-            Function function = (str) -> {
-                WebDriverWait wait = new WebDriverWait(driver, 5); // 设置等待时间， 最大等待 5 秒
-                return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.valueOf(str))));
 
-            };
-            //搜索hello world
+           //搜索hello world
             String keyword = "hello world";
             driver.get("https://www.baidu.com/");
             driver.findElement(By.id("kw")).sendKeys(keyword);
             driver.findElement(By.id("su")).click();
 
-            //检查预期
-            MyWait myWait = new MyWait("//*[@id='content_left']//h3");
-            Object until = myWait.until(function);
-            System.out.println(until);
             //搜索结果
-            WebElement h3 = driver.findElement(By.xpath("//*[@id='content_left']//h3"));//第一行搜索结果的标题
+           WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));
             //检查标题内容
             String expected = h3.getText();
             if (expected.contains(keyword)) {
@@ -67,8 +60,8 @@ public class Demo_zqq {
             Thread.sleep(1000 * 2);
             driver.findElement(By.linkText("确认")).click();
             Thread.sleep(1000 * 3);
-            //搜索结果
-            WebElement h4 = driver.findElement(By.xpath("//*[@id=\"1\"]/h3/a"));//第一行搜索结果的标题
+            //搜索结果WebElement h3 =
+            WebElement h4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\"//*[@id=\\\"1\\\"]/h3/a\"")));
             //检查标题内容
             String expected1 = h4.getText();
             if (expected.contains(keyword)) {

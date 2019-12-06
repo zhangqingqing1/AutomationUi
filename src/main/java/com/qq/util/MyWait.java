@@ -3,11 +3,11 @@ package com.qq.util;
 import org.openqa.selenium.support.ui.Wait;
 import java.util.function.Function;
 
-public  class MyWait implements Wait {
+public  class MyWait<T> implements Wait {
 
-    private String str;
+    private T str;
 
-    public MyWait(String str) {
+    public MyWait(T str) {
         this.str = str;
     }
 
@@ -16,7 +16,7 @@ public  class MyWait implements Wait {
         return  function.apply(str);
     }
 
-    public void setStr(String str) {
+    public void setStr(T str) {
         this.str = str;
     }
 }

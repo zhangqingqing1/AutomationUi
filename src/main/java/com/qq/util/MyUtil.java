@@ -2,23 +2,16 @@ package com.qq.util;
 
 
 import com.qq.demo.Demo_zqq;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Properties;
-import java.util.function.Function;
+import java.util.*;
 
-public class MyUtil  {
-   // 获取driver
-    public  static WebDriver getDriver() throws IOException {
+public class MyUtil {
+    // 获取driver
+    public static WebDriver getDriver() throws IOException {
         String machineName = System.getProperty("user.name");
         Properties properties = new Properties();
         properties.load(MyUtil.class.getResourceAsStream("/chromeversion.properties"));
@@ -27,15 +20,18 @@ public class MyUtil  {
         System.setProperty("webdriver.chrome.driver", driverPath);
         return new ChromeDriver();
     }
-//获取开始日期
+
+    //获取开始日期
     public static String getDateStart() throws ParseException {
         return Calendar.getInstance().get(Calendar.YEAR) + "-01-01";
     }
-//获取结束日期
+
+    //获取结束日期
     public static String getDateEnd() {
         return new SimpleDateFormat("yyyy-MM-dd ").format(new Date());
     }
-// 获取指定日期0：0：0 时间戳
+
+    // 获取指定日期0：0：0 时间戳
     public static Long getDayBegin(String datestr) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(datestr);
@@ -70,6 +66,6 @@ public class MyUtil  {
         // 获取本月最后一天的时间戳
         return c.getTimeInMillis();
     }
-
+//
 }
 

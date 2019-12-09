@@ -3,31 +3,25 @@ package com.qq.demo;
 
 
 
-import com.qq.util.MyUtil;
-import com.qq.util.MyWait;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.qq.util.ExcelDataVO_zqq;
+import com.qq.util.ExcelUtil_zqq;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Zqq {
-    public static void main(String[] args) throws ParseException, InterruptedException {
-        System.out.println(MyUtil.getDateStart() + "," + MyUtil.getDateEnd());
-        System.out.println(MyUtil.getDayBegin("2019-01-01") + "," + MyUtil.getDayEnd("2019-01-01"));
-        Function function = (str) -> {
-            WebDriverWait wait = null;
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath((String) str)));
-        };
-       new MyWait("1213").until(function);
-    }
+
+public static void main(String[] args) {
+
+    // 设定Excel文件所在路径
+    String excelFileName = "E://workspace//AutomationUi//src//main//resources//Excel用例模板.xlsx" ;
+    System.out.println(excelFileName);
+    // 读取Excel文件内容
+   List<ExcelDataVO_zqq> readResult = ExcelUtil_zqq.readExcel(excelFileName);
+    for (int i = 0; i <readResult.size() ; i++) {
+        System.out.println("用例编号: "+readResult.get(i).getCaseName()+"关键字: "+readResult.get(i).getKeyword()+"开始时间:"+readResult.get(i).getStartTime()+"结束时间:"+readResult.get(i).getEndTime());
 
     }
+}
+}
+
 

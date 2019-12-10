@@ -24,7 +24,7 @@ public class ExcelUtil_wxj {
             // 创建一个数组用来存储每一列的值
             String[] str = new String[sh1.getRow(i).getPhysicalNumberOfCells()];
             // 列数
-            for (int j=0;j<sh1.getRow(i).getPhysicalNumberOfCells(); j++) {
+            for (int j=1;j<sh1.getRow(i).getPhysicalNumberOfCells(); j++) {
                 // 获取第i行，第j列的值
                 str[j] = sh1.getRow(i).getCell(j).getStringCellValue();
                 line.put(sh1.getRow(0).getCell(j).getStringCellValue(), str[j]);

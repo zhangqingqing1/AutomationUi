@@ -1,7 +1,7 @@
 package com.qq.cases;
 
-import com.qq.util.DateUtil;
 import com.qq.util.EnvUtil;
+import com.qq.util.ExcelUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,9 +11,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @description:
@@ -31,7 +34,7 @@ public class BaiduTest {
     public void beforeTest() throws IOException {
         System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
     }
 
@@ -46,10 +49,13 @@ public class BaiduTest {
     /**
      * 搜索功能测试
      */
-    @Test
-    public void searchTest() {
+    @Test(dataProvider = "provider")
+    public void searchTest(Map<String, String> caseData) {
+        String keyword = caseData.get("keyword");
+        String startDate = caseData.get("startTime");
+        String endDate = caseData.get("endTime");
         //搜索hello world
-        String keyword = "日本";
+//        String keyword = "日本";
         driver.get("https://www.baidu.com/");
         driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();
@@ -69,9 +75,9 @@ public class BaiduTest {
         WebElement endDateEle = driver.findElement(By.xpath("//*[@class=\"c-tip-custom-et\"]/input"));
         //输入开始时间与结束时间
         startDateEle.clear();
-        startDateEle.sendKeys(DateUtil.firstDayOfYear());
+        startDateEle.sendKeys(startDate);
         endDateEle.clear();
-        endDateEle.sendKeys(DateUtil.currentDay());
+        endDateEle.sendKeys(endDate);
         //点击"确认"
         driver.findElement(By.linkText("确认")).click();
 
@@ -80,5 +86,15 @@ public class BaiduTest {
         String expectedFilter = h3ByFilter.getText();
         if (!expectedFilter.contains(keyword))
             throw new AssertionError("筛选后结果不符合预期");
+    }
+
+    @DataProvider(name = "provider")
+    public Object[] provider() {
+        List<Map<String, String>> searchTest = ExcelUtil.getCases(ExcelUtil.class.getResource("/BaiduTest.xlsx").getPath(), "searchTest");
+        Object[] ret = new Object[searchTest.size()];
+        for (int i = 0; i < searchTest.size(); i++) {
+            ret[i] = searchTest.get(i);
+        }
+        return ret;
     }
 }

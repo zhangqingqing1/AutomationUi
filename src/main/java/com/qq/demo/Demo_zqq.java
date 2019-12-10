@@ -1,5 +1,6 @@
 package com.qq.demo;
 
+import com.qq.util.ExcelUtil_zqq;
 import com.qq.util.MyUtil;
 import com.qq.util.MyWait;
 import org.openqa.selenium.By;
@@ -11,6 +12,8 @@ import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -30,11 +33,10 @@ public class Demo_zqq {
 
     }
 
-    @Test
-    public void test() throws InterruptedException, ParseException {
+    @Test(dataProvider = "provider")
+    public void test(String keyword, String startTime, String endTime) throws InterruptedException, ParseException {
 
         //搜索hello world
-        String keyword = "hello world";
         driver.get("https://www.baidu.com/");
         driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();
@@ -55,9 +57,9 @@ public class Demo_zqq {
         Thread.sleep(1000 * 2);
         // 输入时间
         driver.findElement(By.name("st")).clear();
-        driver.findElement(By.name("st")).sendKeys(MyUtil.getDateStart());
+        driver.findElement(By.name("st")).sendKeys(startTime);
         driver.findElement(By.name("et")).clear();
-        driver.findElement(By.name("et")).sendKeys(MyUtil.getDateEnd());
+        driver.findElement(By.name("et")).sendKeys(endTime);
         Thread.sleep(1000 * 2);
         driver.findElement(By.linkText("确认")).click();
         Thread.sleep(1000 * 3);
@@ -72,7 +74,26 @@ public class Demo_zqq {
         }
     }
 
-    //关闭浏览器连接，释放资源
+    @DataProvider(name = "provider")
+    public Object[][] provider() {
+        String excelFileName = Zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
+        Object[][] provider = new Object[4][3];
+        for (int i = 0; i < list.size(); i++) {
+            Map<String,List<String>> map=list.get(i);
+            for(Map.Entry<String,List<String>> entry:map.entrySet()){
+                provider[i][0] = entry.getValue().get(0);
+                provider[i][1] = entry.getValue().get(1);
+                provider[i][2] = entry.getValue().get(2);
+            }
+
+
+
+
+        }
+        return provider;
+    }
+
     @AfterClass
     public void AfterTest() {
         driver.quit();

@@ -7,7 +7,7 @@ import java.io.File;
 public class ExcelUtil_wxj {
     public static void main(String[] args) {
         try{
-            Workbook workbook = WorkbookFactory.create(new File("C:\\Users\\王香姣\\Desktop\\Excel用例模板.xlsx"));
+            Workbook workbook = WorkbookFactory.create(new File(".\\src\\main\\resources\\cases.xlsx"));
             @SuppressWarnings("resource")
             //加载sheet
             Sheet sh1 = workbook.getSheetAt(0);

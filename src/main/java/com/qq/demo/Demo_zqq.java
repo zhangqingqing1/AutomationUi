@@ -76,7 +76,7 @@ public class Demo_zqq {
 
     @DataProvider(name = "provider")
     public Object[][] provider() {
-        String excelFileName = Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+        String excelFileName = Zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
         List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
         Object[][] provider = new Object[4][3];
         for (int i = 0; i < list.size(); i++) {

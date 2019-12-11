@@ -1,18 +1,26 @@
 package com.qq.demo;
 
 import com.qq.util.DateUtilWang;
+import com.qq.util.ExcelUtil_wxj;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class Demo_wxj {
     private static WebDriver driver;
-
-    public static void main(String[] args) throws InterruptedException, IOException {
+    @BeforeTest
+    public void beforeTest() throws IOException {
         String userName = System.getProperty("user.name");
         Properties properties = new Properties();
         properties.load(Demo_wxj.class.getResourceAsStream("/chromeversion.properties"));
@@ -22,9 +30,25 @@ public class Demo_wxj {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
 
-        //搜索hello world
-        String keyword="hello world";
+    @DataProvider(name = "test1")
+    public Object[][] createDate() throws IOException {
+        File file= new File(".\\src\\main\\resources\\BaiduTest.xlsx");
+        List<HashMap<String, Object>> list = ExcelUtil_wxj.readExcel(file);
+        int row = list.size();
+        Object[][] obj = new Object[row][3];
+        for(int i=0;i<row;i++){
+            obj[i][0] = list.get(i).get("keyword");
+            obj[i][1] = list.get(i).get("startTime");
+            obj[i][2] = list.get(i).get("endTime");
+        }
+        return obj;
+    }
+
+    @Test(dataProvider = "test1")
+    public void searchTest(String keyword,String startTime,String endTime) throws InterruptedException{
+        //搜索关键字
         driver.get("https://www.baidu.com/");
         driver.findElement(By.id("kw")).sendKeys(keyword);
         driver.findElement(By.id("su")).click();
@@ -44,21 +68,23 @@ public class Demo_wxj {
         /*搜索工具筛选*/
         //点击搜索工具
         driver.findElement(By.className("search_tool")).click();
-        Thread.sleep(1000 * 3);
+        Thread.sleep(1000 * 1);
         //点击时间不限
         driver.findElement(By.className("search_tool_tf")).click();
-        Thread.sleep(1000 * 3);
-        //清空开始时间输入框 并获取当年第一天
+        Thread.sleep(1000 * 1);
+        //清空开始时间输入框 并获取开始时间
         driver.findElement(By.name("st")).clear();
-        Thread.sleep(1000 * 3);
-        driver.findElement(By.name("st")).sendKeys(DateUtilWang.getFirstDayOfCurrentYear());
-        Thread.sleep(1000 * 3);
+        Thread.sleep(1000 * 1);
+//        driver.findElement(By.name("st")).sendKeys(DateUtilWang.getFirstDayOfCurrentYear());
+        driver.findElement(By.name("st")).sendKeys(startTime);
+        Thread.sleep(1000 * 1);
 
-        //清空结束时间输入框 并获取当年当天
+        //清空结束时间输入框 并获取结束时间
         driver.findElement(By.name("et")).clear();
-        Thread.sleep(1000 * 3);
-        driver.findElement(By.name("et")).sendKeys(DateUtilWang.getCurrentDay());
-        Thread.sleep(1000 * 3);
+        Thread.sleep(1000 * 1);
+//        driver.findElement(By.name("et")).sendKeys(DateUtilWang.getCurrentDay());
+        driver.findElement(By.name("et")).sendKeys(endTime);
+        Thread.sleep(1000 * 1);
         //点击确定
         driver.findElement(By.className("c-tip-custom-submit")).click();
 
@@ -69,12 +95,12 @@ public class Demo_wxj {
         //检查标题内容
         String expectedFilter = h3ByFilter.getText();
         if (expectedFilter.contains(keyword)) {
-            System.out.println("筛选后搜索结果 第一条包含hello world");
+            System.out.println("筛选后搜索结果 第一条包含"+" "+keyword);
         } else {
-            System.out.println("筛选后搜索结果 第一条不包含hello world");
+            System.out.println("筛选后搜索结果 第一条不包含"+" "+keyword);
         }
-
-        //关闭浏览器连接，释放资源
-        driver.quit();
     }
+
+    @AfterTest
+    public void afterTest() {if(null != driver) driver.quit();}
 }

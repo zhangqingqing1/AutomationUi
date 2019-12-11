@@ -23,14 +23,14 @@ import java.util.function.Function;
  */
 public class Demo_zqq {
     private static WebDriver driver;
-    WebDriverWait wait;
+    WebDriverWait  wait;
 
     @BeforeClass
     public void beforeClass() throws InterruptedException, IOException, ParseException {
         //定义driver
         driver = MyUtil.getDriver();
         driver.manage().window().maximize();
-
+        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
     }
 
     @Test(dataProvider = "provider")
@@ -52,9 +52,8 @@ public class Demo_zqq {
         }
         //任务2 在搜索出hello world的基础上，做筛选，自定义时间，当年的1月1号到今天（程序运行的这一天），然后再校验第一行搜索结果标题是不是包含hello world
         driver.findElement(By.className("search_tool")).click();
-        Thread.sleep(1000 * 2);
+        WebElement search_tool_tf = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='search_tool_tf ']")));
         driver.findElement(By.xpath("//*[@id=\"container\"]/div[2]/div/div[1]/span[2]")).click();
-        Thread.sleep(1000 * 2);
         // 输入时间
         driver.findElement(By.name("st")).clear();
         driver.findElement(By.name("st")).sendKeys(startTime);
@@ -64,19 +63,19 @@ public class Demo_zqq {
         driver.findElement(By.linkText("确认")).click();
         Thread.sleep(1000 * 3);
         //搜索结果WebElement h3 =
-        WebElement h4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\"//*[@id=\\\"1\\\"]/h3/a\"")));
+        WebElement h4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));//第一行搜索结果的标题
         //检查标题内容
         String expected1 = h4.getText();
-        if (expected.contains(keyword)) {
-            System.out.println("自定义时间搜索成功，符合预期");
+        if (expected1.contains(keyword)) {
+            System.out.println("筛选结果正确，符合预期");
         } else {
-            System.out.println("搜索结果不符合预期");
+            System.out.println("筛选结果不符合预期");
         }
-    }
 
+    }
     @DataProvider(name = "provider")
     public Object[][] provider() {
-        String excelFileName = Zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+        String excelFileName =Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
         List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
         Object[][] provider = new Object[4][3];
         for (int i = 0; i < list.size(); i++) {

@@ -3,6 +3,7 @@ package com.qq.demo;
 import com.qq.util.ExcelUtil_zqq;
 import com.qq.util.MyUtil;
 import com.qq.util.MyWait;
+import org.apache.xmlbeans.impl.xb.ltgfmt.TestCase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,8 @@ import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -33,7 +36,7 @@ public class Demo_zqq {
         wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
     }
 
-    @Test(dataProvider = "provider")
+    @Test(dataProvider = "iterator")
     public void test(String keyword, String startTime, String endTime) throws InterruptedException, ParseException {
 
         //搜索hello world
@@ -92,8 +95,28 @@ public class Demo_zqq {
         }
         return provider;
     }
+    @DataProvider(name="iterator")
+    public Iterator<Object[]> getMethodData1() {
+        String excelFileName =Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
+        List<Object[]> testCases = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, List<String>> map = list.get(i);
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                Object[] objects = new Object[entry.getValue().size()];
+                for (int j = 0; j < entry.getValue().size(); j++) {
+                    objects[0] = entry.getValue().get(0);
+                    objects[1] = entry.getValue().get(1);
+                    objects[2] = entry.getValue().get(2);
 
-    @AfterClass
+                }
+                testCases.add(objects);
+            }
+
+        }
+        return testCases.iterator();
+    }
+        @AfterClass
     public void AfterTest() {
         driver.quit();
     }

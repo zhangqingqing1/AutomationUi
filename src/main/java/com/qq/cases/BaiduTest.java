@@ -1,7 +1,6 @@
 package com.qq.cases;
 
 import com.qq.util.EnvUtil;
-import com.qq.util.ExcelUtil;
 import com.qq.util.QQDataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,12 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Map;
 
 /**

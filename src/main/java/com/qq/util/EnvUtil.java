@@ -15,6 +15,6 @@ public class EnvUtil {
         Properties properties = new Properties();
         properties.load(EnvUtil.class.getResourceAsStream("/chromeversion.properties"));
         String chromeVersion = properties.getProperty(USER_NAME);
-        return EnvUtil.class.getResource("/").getPath() + "drivers/chromedriver" + chromeVersion + ".exe";
+        return EnvUtil.class.getResource("/drivers/chromedriver" + chromeVersion + ".exe").getPath();
     }
 }

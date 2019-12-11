@@ -2,6 +2,7 @@ package com.qq.cases;
 
 import com.qq.util.EnvUtil;
 import com.qq.util.ExcelUtil;
+import com.qq.util.QQDataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +51,7 @@ public class BaiduTest {
     /**
      * 搜索功能测试
      */
-    @Test(dataProvider = "provider")
+    @Test(dataProvider = "provider", dataProviderClass = QQDataProvider.class)
     public void searchTest(Map<String, String> caseData) {
         String keyword = caseData.get("keyword");
         String startDate = caseData.get("startTime");
@@ -86,15 +88,5 @@ public class BaiduTest {
         String expectedFilter = h3ByFilter.getText();
         if (!expectedFilter.contains(keyword))
             throw new AssertionError("筛选后结果不符合预期");
-    }
-
-    @DataProvider(name = "provider")
-    public Object[] provider() {
-        List<Map<String, String>> searchTest = ExcelUtil.getCases(ExcelUtil.class.getResource("/BaiduTest.xlsx").getPath(), "searchTest");
-        Object[] ret = new Object[searchTest.size()];
-        for (int i = 0; i < searchTest.size(); i++) {
-            ret[i] = searchTest.get(i);
-        }
-        return ret;
     }
 }

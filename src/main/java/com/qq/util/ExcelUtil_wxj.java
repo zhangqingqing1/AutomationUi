@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ExcelUtil_wxj {
-//    public static void main(String[] args) throws IOException {
-//        System.out.println(readExcel(new File(".\\src\\main\\resources\\BaiduTest.xlsx")));
-//    }
     public static List<HashMap<String, Object>> readExcel(File file) throws IOException {
         // 创建一个list 用来存储读取的内容
         List<HashMap<String, Object>> dataList = new ArrayList<>();

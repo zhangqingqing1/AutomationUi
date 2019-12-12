@@ -105,9 +105,9 @@ public class Demo_zqq {
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                 Object[] objects = new Object[entry.getValue().size()];
                 for (int j = 0; j < entry.getValue().size(); j++) {
-                    objects[0] = entry.getValue().get(0);
-                    objects[1] = entry.getValue().get(1);
-                    objects[2] = entry.getValue().get(2);
+                    objects[j] = entry.getValue().get(j);
+//                    objects[1] = entry.getValue().get(1);
+//                    objects[2] = entry.getValue().get(2);
 
                 }
                 testCases.add(objects);

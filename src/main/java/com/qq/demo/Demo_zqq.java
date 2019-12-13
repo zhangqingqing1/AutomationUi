@@ -1,5 +1,6 @@
 package com.qq.demo;
 
+import com.qq.util.DataProvider_zqq;
 import com.qq.util.ExcelUtil_zqq;
 import com.qq.util.MyUtil;
 import com.qq.util.MyWait;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,7 +28,7 @@ import java.util.function.Function;
  */
 public class Demo_zqq {
     private static WebDriver driver;
-    WebDriverWait  wait;
+    WebDriverWait wait;
 
     @BeforeClass
     public void beforeClass() throws InterruptedException, IOException, ParseException {
@@ -36,8 +38,8 @@ public class Demo_zqq {
         wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
     }
 
-    @Test(dataProvider = "iterator")
-    public void test(String keyword, String startTime, String endTime) throws InterruptedException, ParseException {
+    @Test(dataProvider = "iterator",dataProviderClass = DataProvider_zqq.class)
+    public void searchTest(String keyword, String startTime, String endTime) throws InterruptedException, ParseException {
 
         //搜索hello world
         driver.get("https://www.baidu.com/");
@@ -76,47 +78,49 @@ public class Demo_zqq {
         }
 
     }
-    @DataProvider(name = "provider")
-    public Object[][] provider() {
-        String excelFileName =Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
-        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
-        Object[][] provider = new Object[4][3];
-        for (int i = 0; i < list.size(); i++) {
-            Map<String,List<String>> map=list.get(i);
-            for(Map.Entry<String,List<String>> entry:map.entrySet()){
-                provider[i][0] = entry.getValue().get(0);
-                provider[i][1] = entry.getValue().get(1);
-                provider[i][2] = entry.getValue().get(2);
-            }
+
+//    @DataProvider(name = "provider")
+//    public Object[][] provider() {
+//        String excelFileName = Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+//        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
+//        Object[][] provider = new Object[4][3];
+//        for (int i = 0; i < list.size(); i++) {
+//            Map<String, List<String>> map = list.get(i);
+//            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+//                provider[i][0] = entry.getValue().get(0);
+//                provider[i][1] = entry.getValue().get(1);
+//                provider[i][2] = entry.getValue().get(2);
+//            }
+//
+//
+//        }
+//        return provider;
+//    }
+
+//    @DataProvider(name = "iterator")
+//    public Iterator<Object[]> getMethodData1(Method method) {
+//        String excelFileName = Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+//        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, method.getName());
+//        List<Object[]> testCases = new ArrayList<>();
+//        for (int i = 0; i < list.size(); i++) {
+//            Map<String, List<String>> map = list.get(i);
+//            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+//                Object[] objects = new Object[entry.getValue().size()];
+//                for (int j = 0; j < entry.getValue().size(); j++) {
+//                    objects[j] = entry.getValue().get(j);
+//
+//                }
+//                testCases.add(objects);
+//            }
+//
+//        }
+//        return testCases.iterator();
+//    }
 
 
 
 
-        }
-        return provider;
-    }
-    @DataProvider(name="iterator")
-    public Iterator<Object[]> getMethodData1() {
-        String excelFileName =Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
-        List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, "searchTest");
-        List<Object[]> testCases = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            Map<String, List<String>> map = list.get(i);
-            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-                Object[] objects = new Object[entry.getValue().size()];
-                for (int j = 0; j < entry.getValue().size(); j++) {
-                    objects[j] = entry.getValue().get(j);
-//                    objects[1] = entry.getValue().get(1);
-//                    objects[2] = entry.getValue().get(2);
-
-                }
-                testCases.add(objects);
-            }
-
-        }
-        return testCases.iterator();
-    }
-        @AfterClass
+    @AfterClass
     public void AfterTest() {
         driver.quit();
     }

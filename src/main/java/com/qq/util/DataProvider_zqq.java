@@ -13,7 +13,8 @@ public class DataProvider_zqq{
 
     @DataProvider(name = "iterator")
     public Iterator<Object[]> getMethodData1(Method method) {
-        String excelFileName = Demo_zqq.class.getResource("/").getPath() + "BaiduTest.xlsx";
+        String className=method.getDeclaringClass().getSimpleName();
+        String excelFileName = DataProvider_zqq.class.getResource("/").getPath() + className+".xlsx";
         List<Map<String, List<String>>> list = ExcelUtil_zqq.readExcelBYsheetname(excelFileName, method.getName());
         List<Object[]> testCases = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {

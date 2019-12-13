@@ -1,9 +1,11 @@
 package com.qq.cases;
 
-import com.qq.util.MyUtil;
+import com.qq.util.EnvUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -25,9 +27,8 @@ public class SoTest {
 
     @BeforeClass
     public void beforeClass() throws IOException {
-        //定义driver
-        driver = MyUtil.getDriver();
-        driver.manage().window().maximize();
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
+        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
     }
 

@@ -39,7 +39,7 @@ public class Demo_zqq {
     }
 
     @Test(dataProvider = "iterator",dataProviderClass = DataProvider_zqq.class)
-    public void searchTest(String keyword, String startTime, String endTime) throws InterruptedException, ParseException {
+    public void searchTest(String keyword, String startTime, String endTime) throws InterruptedException {
 
         //搜索hello world
         driver.get("https://www.baidu.com/");

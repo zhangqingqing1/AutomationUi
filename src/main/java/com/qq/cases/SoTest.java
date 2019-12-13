@@ -2,7 +2,6 @@ package com.qq.cases;
 
 import com.qq.util.DataProvider_zqq;
 import com.qq.util.MyUtil;
-import com.qq.util.QQDataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Map;
+
 
 /**
  * @description: 360搜索测试
@@ -30,9 +29,8 @@ public class SoTest {
             wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
         }
 
-        @Test(dataProvider = "provider", dataProviderClass = QQDataProvider.class)
-        public void searchTest(Map<String, String> caseData) throws InterruptedException, ParseException {
-            String keyword = caseData.get("keyword");
+      @Test(dataProvider = "iterator",dataProviderClass = DataProvider_zqq.class)
+      public void searchTest(String keyword, String startTime, String endTime) throws InterruptedException {
             //搜索hello world
             driver.get("https://www.baidu.com/");
             driver.findElement(By.id("kw")).sendKeys(keyword);

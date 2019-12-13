@@ -22,7 +22,7 @@ public class SoTest {
         WebDriverWait wait;
 
         @BeforeClass
-        public void beforeClass() throws InterruptedException, IOException, ParseException {
+        public void beforeClass() throws  IOException{
             //定义driver
             driver = MyUtil.getDriver();
             driver.manage().window().maximize();
@@ -30,7 +30,7 @@ public class SoTest {
         }
 
       @Test(dataProvider = "iterator",dataProviderClass = DataProvider_zqq.class)
-      public void searchTest(String keyword, String startTime, String endTime) throws InterruptedException {
+      public void searchTest(String keyword, String startTime, String endTime) {
             //搜索hello world
             driver.get("https://www.baidu.com/");
             driver.findElement(By.id("kw")).sendKeys(keyword);

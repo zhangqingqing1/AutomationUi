@@ -11,13 +11,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * @description:
  * @author: lu
  * @date 2019/12/13 23:30
  */
-public class BasePage {
+public class BasePage implements Serializable {
+    private static final long serialVersionUID = 1611412425740156525L;
     protected WebDriver driver;
     protected WebDriverWait wait;
 

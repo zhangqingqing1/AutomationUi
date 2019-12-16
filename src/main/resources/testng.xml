@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="鲁尼美的测试套件">
-    <test name="百度测试">
-        <classes>
-            <class name="com.qq.cases.BaiduTest"/>
-        </classes>
-    </test>
-</suite>

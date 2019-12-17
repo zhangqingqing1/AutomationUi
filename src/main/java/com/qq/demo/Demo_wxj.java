@@ -43,11 +43,7 @@ public class Demo_wxj {
 
         //检查标题内容
         String expected = h3.getText();
-        if (expected.contains(keyword)) {
-            System.out.println("搜索成功，符合预期");
-        } else {
-            System.out.println("搜索结果不符合预期");
-        }
+        if (!expected.contains(keyword)) throw new AssertionError("搜索结果第一行标题不包含关键字");
 
         /*搜索工具筛选*/
         //点击搜索工具
@@ -67,11 +63,7 @@ public class Demo_wxj {
         WebElement h3ByFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));
         //检查标题内容
         String expectedFilter = h3ByFilter.getText();
-        if (expectedFilter.contains(keyword)) {
-            System.out.println("筛选后搜索结果 第一条包含"+" "+keyword);
-        } else {
-            System.out.println("筛选后搜索结果 第一条不包含"+" "+keyword);
-        }
+        if (!expectedFilter.contains(keyword))  throw new AssertionError("筛选结果不符合预期");
     }
     
     @AfterTest

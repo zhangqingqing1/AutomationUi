@@ -41,6 +41,7 @@ public class BasePage implements Serializable {
         driver.get(url);
         wait = new WebDriverWait(driver, 10);
     }
+    public BasePage(){}
 
     public WebDriver getDriver() {
         return driver;

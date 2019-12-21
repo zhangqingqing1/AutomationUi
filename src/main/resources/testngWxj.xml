@@ -1,0 +1,8 @@
+<suite name="使用xml文件同时运行测试类：BaiduTest与SoTest">
+    <test name="casesTest">
+        <classes>
+            <class name="com.qq.cases.BaiduTest"/>
+            <class name="com.qq.cases.SoTest"/>
+        </classes>>
+    </test>
+</suite>

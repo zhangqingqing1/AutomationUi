@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suite name="张清清测试套件" parallel="false">
-    <test name="张清清搜索">
+<suite name="鲁尼美测试套件" parallel="false">
+    <test name="测试搜索">
         <classes>
             <class name="com.qq.cases.BaiduTest"/>
-            <class name="com.qq.cases.SoTest"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

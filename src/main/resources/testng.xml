@@ -1,8 +1,9 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="鲁尼美的测试套件">
-    <test name="百度测试">
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+    <test name="Test">
         <classes>
             <class name="com.qq.cases.BaiduTest"/>
+            <class name="com.qq.cases.SoTest"/>
         </classes>
-    </test>
-</suite>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->

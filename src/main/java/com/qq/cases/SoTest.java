@@ -18,16 +18,6 @@ import java.util.Map;
  * @date 2019/12/12 11:01
  */
 public class SoTest extends  BaseTest{
-//    private static WebDriver driver;
-//    WebDriverWait wait;
-//
-//    @BeforeTest
-//    public void beforeClass() throws IOException {
-//        //定义driver
-//        driver = MyUtil.getDriver();
-//        driver.manage().window().maximize();
-//        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
-//    }
 
     @Test(dataProviderClass = com.qq.util.QQDataProvider.class, dataProvider = "provider")
     public void searchTest(Map<String, String> map) throws InterruptedException {
@@ -43,11 +33,7 @@ public class SoTest extends  BaseTest{
 
         if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }
-//
-//    @AfterTest
-//    public void AfterTest() {
-//        driver.quit();
-//    }
+
 }
 
 

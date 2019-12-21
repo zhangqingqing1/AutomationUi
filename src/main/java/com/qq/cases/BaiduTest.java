@@ -20,26 +20,7 @@ import java.util.Map;
  * @date 2019/12/5 14:16
  */
 public class BaiduTest extends BaseTest {
-//    WebDriver driver;
-//    WebDriverWait wait;
-//
-//    /**
-//     * 测试之前初始化WebDriver
-//     */
-//    @BeforeTest
-//    public void beforeTest() throws IOException {
-//        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
-//        driver = new ChromeDriver();
-//        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
-//    }
 
-    /**
-     * 测试完成之后关闭driver
-     */
-//    @AfterTest
-//    public void afterTest() {
-//        if (null != driver) driver.quit();
-//    }
 
     /**
      * 搜索功能测试

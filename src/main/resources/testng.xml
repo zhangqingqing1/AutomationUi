@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Suite_zqq" parallel="false">
-    <test name="Test_zqq">
+<suite name="Suite_zqq123456" parallel="false">
+    <test name="Test_zqq123456">
         <classes>
             <class name="com.qq.cases.BaiduTest"/>
             <class name="com.qq.cases.SoTest"/>

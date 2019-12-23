@@ -1,11 +1,10 @@
 package com.qq.cases;
 
 import com.qq.Factory.WebDriverFactory;
+import com.qq.pages.SoPage;
 import com.qq.util.QQDataProvider;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.qq.cases.SousuoPage.*;
+import static com.qq.pages.BaiduPage.*;
 
 
 /**
@@ -24,6 +23,7 @@ import static com.qq.cases.SousuoPage.*;
 public class SoTest {
     private WebDriver driver;
     private WebDriverWait wait;
+    SoPage soPage=new  SoPage();
 
     @BeforeClass
     public void beforeClass() throws IOException {
@@ -35,12 +35,12 @@ public class SoTest {
     public void searchTest(Map<String, String> map) {
         String keyword = map.get("keyword");
         driver.get("https://www.so.com");
-        WebElement input = waitWebElementByid("input");
+        WebElement input = soPage.waitWebElementByid("input");
         input.clear();
         input.sendKeys(keyword);
-        searchButtonClick();
+        soPage.searchButtonClick();
 
-        WebElement result = waitWebElementByxpath("//*[@class='result']//h3");
+        WebElement result =soPage.waitWebElementByxpath("//*[@class='result']//h3");
 
         if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }

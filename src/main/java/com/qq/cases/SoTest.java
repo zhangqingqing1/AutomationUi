@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.qq.cases.SousuoPage.*;
+
 
 /**
  * @description: 360搜索测试
@@ -33,12 +35,12 @@ public class SoTest {
     public void searchTest(Map<String, String> map) {
         String keyword = map.get("keyword");
         driver.get("https://www.so.com");
-        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("input")));
+        WebElement input = waitWebElementByid("input");
         input.clear();
         input.sendKeys(keyword);
-        driver.findElement(By.id("search-button")).click();
+        searchButtonClick();
 
-        WebElement result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='result']//h3")));
+        WebElement result = waitWebElementByxpath("//*[@class='result']//h3");
 
         if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }

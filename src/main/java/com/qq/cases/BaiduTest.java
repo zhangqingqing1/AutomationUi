@@ -13,6 +13,9 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.qq.cases.SousuoPage.*;
+
+
 /**
  * @description:
  * @author: lu
@@ -39,32 +42,32 @@ public class BaiduTest {
         //搜索hello world
 //        String keyword = "日本";
         driver.get("https://www.baidu.com/");
-        driver.findElement(By.id("kw")).sendKeys(keyword);
-        driver.findElement(By.id("su")).click();
+        setKeyword( keyword );
+        sousuoClick();
 
         //搜索结果检查
-        WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));//第一行搜索结果的标题
+        WebElement h3 =  waitWebElementByxpath("//*[@id='content_left']//h3");
         String expected = h3.getText();
         if (!expected.contains(keyword)) throw new AssertionError("搜索结果第一行标题不包含关键字");
 
         /**
          * 搜索筛选实现
          */
-        driver.findElement(By.className("search_tool")).click();
-        WebElement search_tool_tf = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='search_tool_tf ']")));
+        selectClick();
+        WebElement search_tool_tf =  waitWebElementByxpath("//*[@class='search_tool_tf ']");
         search_tool_tf.click();
-        WebElement startDateEle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class=\"c-tip-custom-st\"]/input")));
-        WebElement endDateEle = driver.findElement(By.xpath("//*[@class=\"c-tip-custom-et\"]/input"));
+        WebElement startDateEle =  waitWebElementByxpath("//*[@class=\"c-tip-custom-st\"]/input");
+        WebElement endDateEle = getEnddate();
         //输入开始时间与结束时间
         startDateEle.clear();
         startDateEle.sendKeys(startDate);
         endDateEle.clear();
         endDateEle.sendKeys(endDate);
         //点击"确认"
-        driver.findElement(By.linkText("确认")).click();
+        confirmClick();
 
         //检查预期搜索结果
-        WebElement h3ByFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));//第一行搜索结果的标题
+        WebElement h3ByFilter = waitWebElementByxpath("//*[@id='content_left']//h3");
         String expectedFilter = h3ByFilter.getText();
         if (!expectedFilter.contains(keyword))
             throw new AssertionError("筛选后结果不符合预期");

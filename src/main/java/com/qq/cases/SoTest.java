@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -36,7 +37,7 @@ public class SoTest{
         if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }
 
-    @AfterClass
+    @AfterTest
     public void afterTest() {
         BaiduTest.driver.quit();
     }

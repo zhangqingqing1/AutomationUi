@@ -19,9 +19,16 @@ import java.util.Map;
  * @author: lu
  * @date 2019/12/5 14:16
  */
-public class BaiduTest extends BaseTest {
+public class BaiduTest{
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
 
-
+    @BeforeTest
+    public void beforeTest() throws InterruptedException, IOException {
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
+    }
     /**
      * 搜索功能测试
      */

@@ -1,15 +1,14 @@
 package com.qq.cases;
 
-import com.qq.util.EnvUtil;
+import com.qq.Factory.WebDriverFactory;
 import com.qq.util.QQDataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,16 +18,16 @@ import java.util.Map;
  * @author: lu
  * @date 2019/12/5 14:16
  */
-public class BaiduTest{
-    protected static WebDriver driver;
-    protected static WebDriverWait wait;
+public class BaiduTest {
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    @BeforeTest
-    public void beforeTest() throws InterruptedException, IOException {
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
+    @BeforeClass
+    public void beforeClass() throws IOException {
+        this.driver = WebDriverFactory.getDriver();
+        this.wait = new WebDriverWait(driver, 10);
     }
+
     /**
      * 搜索功能测试
      */

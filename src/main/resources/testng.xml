@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="鲁尼美测试套件" parallel="false">
-    <test name="测试搜索">
+<suite name="suite" parallel="false">
+    <!--beforeTest-->
+    <test name="test">
         <classes>
+            <!--beforeClass-->
             <class name="com.qq.cases.BaiduTest"/>
             <class name="com.qq.cases.SoTest"/>
+            <class name="com.qq.cases.CommonTest"/>
         </classes>
-    </test> <!-- Test -->
-</suite> <!-- Suite -->
+    </test>
+</suite>

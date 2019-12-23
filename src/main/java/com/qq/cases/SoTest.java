@@ -25,12 +25,12 @@ public class SoTest {
     private static WebDriver driver;
     WebDriverWait wait;
 
-    @BeforeClass
-    public void beforeClass() throws IOException {
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
-    }
+//    @BeforeClass
+//    public void beforeClass() throws IOException {
+//        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, EnvUtil.driverPath());
+//        driver = new ChromeDriver();
+//        wait = new WebDriverWait(driver, 10);//全局设置显示等待10s,超时则异常
+//    }
 
     @Test(dataProviderClass = com.qq.util.QQDataProvider.class, dataProvider = "provider")
     public void searchTest(Map<String, String> map) {
@@ -46,10 +46,10 @@ public class SoTest {
         if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }
 
-    @AfterClass
-    public void AfterTest() {
-        driver.quit();
-    }
+//    @AfterClass
+//    public void AfterTest() {
+//        driver.quit();
+//    }
 }
 
 

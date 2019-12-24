@@ -3,8 +3,10 @@ package com.qq.cases;
 import com.qq.Factory.WebDriverFactory;
 import com.qq.pages.BaiduPage;
 import com.qq.util.QQDataProvider;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -41,32 +43,32 @@ public class BaiduTest {
         //搜索hello world
 //        String keyword = "日本";
         driver.get("https://www.baidu.com/");
-        baiduPage.setKeyword( keyword );
-        baiduPage.sousuoClick();
+        driver.findElement(By.id("kw")).sendKeys(keyword);
+        driver.findElement(By.id("su")).click();
 
         //搜索结果检查
-        WebElement h3 = baiduPage.waitWebElementByxpath("//*[@id='content_left']//h3");
+        WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));//第一行搜索结果的标题
         String expected = h3.getText();
         if (!expected.contains(keyword)) throw new AssertionError("搜索结果第一行标题不包含关键字");
 
         /**
          * 搜索筛选实现
          */
-        baiduPage.selectClick();
-        WebElement search_tool_tf =  baiduPage.waitWebElementByxpath("//*[@class='search_tool_tf ']");
+        driver.findElement(By.className("search_tool")).click();
+        WebElement search_tool_tf = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='search_tool_tf ']")));
         search_tool_tf.click();
-        WebElement startDateEle =  baiduPage.waitWebElementByxpath("//*[@class=\"c-tip-custom-st\"]/input");
-        WebElement endDateEle =baiduPage.getEnddate();
+        WebElement startDateEle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class=\"c-tip-custom-st\"]/input")));
+        WebElement endDateEle = driver.findElement(By.xpath("//*[@class=\"c-tip-custom-et\"]/input"));
         //输入开始时间与结束时间
         startDateEle.clear();
         startDateEle.sendKeys(startDate);
         endDateEle.clear();
         endDateEle.sendKeys(endDate);
         //点击"确认"
-        baiduPage.confirmClick();
+        driver.findElement(By.linkText("确认")).click();
 
         //检查预期搜索结果
-        WebElement h3ByFilter = baiduPage.waitWebElementByxpath("//*[@id='content_left']//h3");
+        WebElement h3ByFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content_left']//h3")));//第一行搜索结果的标题
         String expectedFilter = h3ByFilter.getText();
         if (!expectedFilter.contains(keyword))
             throw new AssertionError("筛选后结果不符合预期");

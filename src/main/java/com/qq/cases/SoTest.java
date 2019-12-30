@@ -36,7 +36,16 @@ public class SoTest {
     @Test(dataProviderClass = QQDataProvider.class, dataProvider = "provider")
     public void searchTest(Map<String, String> map) {
         String keyword = map.get("keyword");
-        soPage.search(keyword);
+        driver.get("https://www.so.com");
+        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("input")));
+        input.clear();
+        input.sendKeys(keyword);
+        driver.findElement(By.id("search-button")).click();
 
+        WebElement result = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='result']//h3")));
+
+        if (!result.getText().contains(keyword)) throw new AssertionError("360搜索结果不符合预期");
     }
+
 }
+

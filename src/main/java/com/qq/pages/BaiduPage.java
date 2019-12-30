@@ -23,46 +23,64 @@ public class BaiduPage {
         }
     }
 
-    WebDriverWait wait=new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+
+    public  String  url;
+    public  String  input;
+    public  String  submit;
+    public  String  xpath;
+    public  String className;
+    public  String  xpath1;
+    public String  xpath2;
+    public String  xpath3;
+    public  String  xpath4;
 
 
-    //百度搜索框输入关键字
-    public  void setKeyword(String userText)
-            throws NotFoundException {
-        driver.findElement(By.id("kw")).sendKeys(userText);
+
+    public void search(String keyword){
+        driver.get(url);
+        driver.findElement(By.id(input)).sendKeys(keyword);
+        driver.findElement(By.id(submit)).click();
+        WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));//第一行搜索结果的标题
+        String expected = h3.getText();
+        if (!expected.contains(keyword)) throw new AssertionError("搜索结果第一行标题不包含关键字");
+
     }
 
-    //点击搜索
-    public  void sousuoClick()
-            throws NotFoundException {
-        driver.findElement(By.id("su")).click();
-    }
 
-    //点击筛选
-    public  void selectClick()
-            throws NotFoundException {
-        driver.findElement(By.className("search_tool")).click();
-    }
-
-    //点击确认按钮
-    public void confirmClick()
-            throws NotFoundException {
+    public void searchAndFilter(String keyword,String startDate,String endDate){
+        driver.get(url);
+        driver.findElement(By.id(input)).sendKeys(keyword);
+        driver.findElement(By.id(submit)).click();
+        //搜索结果检查
+        WebElement h3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));//第一行搜索结果的标题
+        String expected = h3.getText();
+        if (!expected.contains(keyword)) throw new AssertionError("搜索结果第一行标题不包含关键字");
+        /**
+         * 搜索筛选实现
+         */
+        driver.findElement(By.className(className)).click();
+        WebElement search_tool_tf = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath1)));
+        search_tool_tf.click();
+        WebElement startDateEle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath2)));
+        WebElement endDateEle = driver.findElement(By.xpath(xpath3));
+        //输入开始时间与结束时间
+        startDateEle.clear();
+        startDateEle.sendKeys(startDate);
+        endDateEle.clear();
+        endDateEle.sendKeys(endDate);
+        //点击"确认"
         driver.findElement(By.linkText("确认")).click();
+
+        //检查预期搜索结果
+        WebElement h3ByFilter = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath4)));//第一行搜索结果的标题
+        String expectedFilter = h3ByFilter.getText();
+        if (!expectedFilter.contains(keyword))
+            throw new AssertionError("筛选后结果不符合预期");
     }
 
-    //根据xpaht等待元素
-    public  WebElement waitWebElementByxpath(String test) throws NotFoundException {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(test)));
     }
 
-    //根据id等待元素
-    public  WebElement waitWebElementByid(String test) throws NotFoundException {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(test)));
-    }
 
-    //得到结束时间日期元素
-    public  WebElement getEnddate() throws NotFoundException {
-        return driver.findElement(By.xpath("//*[@class=\"c-tip-custom-et\"]/input"));
-    }
 
-}
+

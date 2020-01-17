@@ -6,9 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.IOException;
 
-public class SoPage {
+public class SoPage extends BasePage {
     WebDriver driver;
 
     {
@@ -23,6 +24,9 @@ public class SoPage {
     public String  input;
     public String  submit;
     public String  xpath;
+
+    public SoPage() {
+    }
 
     public void search(String keyword){
         driver.get("https://www.so.com");

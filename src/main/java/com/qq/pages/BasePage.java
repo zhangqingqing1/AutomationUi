@@ -4,6 +4,7 @@ import com.qq.Factory.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -34,6 +35,13 @@ public class BasePage {
     }
 
     public BasePage() {
+        try {
+            this.driver = WebDriverFactory.getDriver();
+            this.wait = new WebDriverWait(driver, 10);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public BasePage(WebDriver driver) {
@@ -41,10 +49,15 @@ public class BasePage {
         wait = new WebDriverWait(driver, WAIT_TIME_OUT);
     }
 
-    public BasePage(String url) throws IOException {
-        this.driver = WebDriverFactory.getDriver();
-        wait = new WebDriverWait(driver, WAIT_TIME_OUT);
-        driver.get(url);
+    public BasePage(String url) {
+        try {
+            this.driver = WebDriverFactory.getDriver();
+            wait = new WebDriverWait(driver, WAIT_TIME_OUT);
+            driver.get(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //输入框，指定元素
@@ -54,7 +67,7 @@ public class BasePage {
 
     //输入框，指定元素定位方式
     public void sendKeys(By by, String keywords) {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+       wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
         driver.findElement(by).sendKeys(keywords);
     }
 

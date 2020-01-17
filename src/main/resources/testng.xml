@@ -4,9 +4,9 @@
     <test name="test">
         <classes>
             <!--beforeClass-->
-            <class name="com.qq.cases.BaiduTest"/>
-            <class name="com.qq.cases.SoTest"/>
-            <class name="com.qq.cases.CommonTest"/>
+            <class name="com.qq.cases.BaiduTest2"/>
+            <!--<class name="com.qq.cases.SoTest"/>-->
+            <!--<class name="com.qq.cases.CommonTest"/>-->
         </classes>
     </test>
 </suite>

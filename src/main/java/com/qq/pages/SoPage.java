@@ -1,6 +1,6 @@
 package com.qq.pages;
 
-import com.qq.Factory.WebDriverFactory;
+import com.qq.factory.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

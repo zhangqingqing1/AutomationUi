@@ -1,6 +1,6 @@
 package com.qq.cases;
 
-import com.qq.Factory.WebDriverFactory;
+import com.qq.factory.WebDriverFactory;
 import com.qq.pages.BaiduPage;
 import com.qq.util.QQDataProvider;
 import org.openqa.selenium.WebDriver;

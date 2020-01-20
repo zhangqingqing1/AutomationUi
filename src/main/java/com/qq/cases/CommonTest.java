@@ -1,6 +1,6 @@
 package com.qq.cases;
 
-import com.qq.Factory.WebDriverFactory;
+import com.qq.factory.WebDriverFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 

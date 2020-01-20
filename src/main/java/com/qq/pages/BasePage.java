@@ -1,10 +1,9 @@
 package com.qq.pages;
 
-import com.qq.Factory.WebDriverFactory;
+import com.qq.factory.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,22 +16,6 @@ public class BasePage {
     private static final int WAIT_TIME_OUT = 20;//显示等待20秒
     private WebDriver driver;
     private WebDriverWait wait;
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public WebDriverWait getWait() {
-        return wait;
-    }
-
-    public void setWait(WebDriverWait wait) {
-        this.wait = wait;
-    }
 
     public BasePage() {
         try {
@@ -58,6 +41,22 @@ public class BasePage {
             e.printStackTrace();
         }
 
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    public void setWait(WebDriverWait wait) {
+        this.wait = wait;
     }
 
     //输入框，指定元素

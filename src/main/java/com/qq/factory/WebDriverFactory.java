@@ -1,4 +1,4 @@
-package com.qq.Factory;
+package com.qq.factory;
 
 import com.qq.util.EnvUtil;
 import org.openqa.selenium.WebDriver;
